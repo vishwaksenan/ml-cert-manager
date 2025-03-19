@@ -1,6 +1,8 @@
 cronJob:
   name: secret-sync
-  image: 
+  image: europe-west2-docker.pkg.dev/playpen-86bd2a/deployment-artifacts/playpen-base-image
+
+namespace: istio-ingress
 
 projects:
   - name: project1

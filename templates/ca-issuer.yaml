@@ -3,9 +3,8 @@ apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: {{ include "caIssuerName" . }}
-  # annotations:
-  #   "helm.sh/hook": pre-install
-  #   "helm.sh/hook-weight": "3"
+  namespace: {{ $.Values.namespace }}
+  
 spec:
   ca:
     secretName: {{ include "caSecretName" . }}
