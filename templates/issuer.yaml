@@ -1,0 +1,12 @@
+{{- range .Values.projects }}
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: {{ include "issuerName" . }}
+  # annotations:
+  #   "helm.sh/hook": pre-install
+  #   "helm.sh/hook-weight": "1"
+spec:
+  selfSigned: {}
+---
+{{- end }}

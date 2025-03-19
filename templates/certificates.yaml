@@ -1,0 +1,24 @@
+{{- range .Values.projects }}
+{{- $project := . }}
+{{- range .certificates }}
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ include "certName" . }}
+  # annotations:
+  #   "helm.sh/hook": pre-install
+  #   "helm.sh/hook-weight": "4"
+spec:
+  secretName: {{ include "certSecretName" . }}
+  isCA: false
+  commonName: {{ .name }}
+  duration: {{ .duration }}
+  renewBefore: {{ .renewBefore }}
+  usages:
+    - server auth
+    - client auth
+  issuerRef:
+    name: '{{ include "caCertName" $project }}-issuer'
+---
+{{- end }}
+{{- end }}
