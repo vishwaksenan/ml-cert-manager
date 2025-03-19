@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ .Values.cronJob.name }}
+  namespace: {{ .Values.namespace }}
+spec:
+  schedule: "0 0 * * *"
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 0
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: {{ .Values.cronJob.serviceAccount }}
+          containers:
+          - name: "{{ .Values.cronJob.name }}-container"
+            image: {{ .Values.cronJob.image }}
+            imagePullPolicy: IfNotPresent
+            command:
+            - sh
+            - -c
+            - gcloud container clusters get-credentials cluster-1 --region europe-west2 --project playpen-86bd2a && python3 update-k8s-gcp-cert-secret.py 24
+          restartPolicy: OnFailure
