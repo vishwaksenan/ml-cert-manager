@@ -16,6 +16,6 @@ spec:
         command:
         - sh
         - -c
-        - gcloud container clusters get-credentials cluster-1 --region europe-west2 --project playpen-86bd2a && python3 update-k8s-gcp-cert-secret.py --expiry=24 --now=true
+        - gcloud container clusters get-credentials cluster-1 --region europe-west2 --project playpen-3a83c0 && python3 update-k8s-gcp-cert-secret.py --expiry=24 --now=true
       restartPolicy: OnFailure
   backoffLimit: 20
