@@ -1,11 +1,11 @@
 cronJob:
   name: secret-sync-cronjob
-  image: europe-west2-docker.pkg.dev/playpen-86bd2a/deployment-artifacts/playpen-base-image:cert
+  image: europe-west2-docker.pkg.dev/playpen-86bd2a/deployment-artifacts/playpen-base-image:latest
   serviceAccount: svc-gke-secret-sync
 
 job:
   name: secret-sync-job
-  image: europe-west2-docker.pkg.dev/playpen-86bd2a/deployment-artifacts/playpen-base-image:cert
+  image: europe-west2-docker.pkg.dev/playpen-86bd2a/deployment-artifacts/playpen-base-image:latest
   serviceAccount: svc-gke-secret-sync
 
 namespace: istio-ingress
