@@ -2,7 +2,7 @@ options:
   logging: CLOUD_LOGGING_ONLY
 
 steps:
-  - name: 'europe-west2-docker.pkg.dev/playpen-86bd2a/deployment-artifacts/playpen-base-image'
-    args: ["gcloud", "container", "clusters", "get-credentials", "cluster-1", "--region=europe-west2", "--project=playpen-86bd2a"]
-  - name: 'europe-west2-docker.pkg.dev/playpen-86bd2a/deployment-artifacts/playpen-base-image'
+  - name: 'europe-west2-docker.pkg.dev/playpen-3a83c0/deployment-artifacts/playpen-base-image'
+    args: ["gcloud", "container", "clusters", "get-credentials", "cluster-1", "--region=europe-west2", "--project=playpen-3a83c0"]
+  - name: 'europe-west2-docker.pkg.dev/playpen-3a83c0/deployment-artifacts/playpen-base-image'
     args: ["helm", "upgrade", "--install", "mycerts", ".", "--wait"]
