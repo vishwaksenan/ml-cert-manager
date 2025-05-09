@@ -1,19 +1,21 @@
-# apiVersion: batch/v1
-# kind: Job
-# metadata:
-#   name: {{ .Values.job.name }}
-#   namespace: {{ .Values.namespace }}
-# spec:
-#   ttlSecondsAfterFinished: 30
-#   template:
-#     spec:
-#       serviceAccount: {{ .Values.job.serviceAccount }}
-#       containers:
-#       - name: "{{ .Values.job.name }}-container"
-#         image: {{ .Values.job.image }}
-#         command:
-#         - sh
-#         - -c
-#         - gcloud container clusters get-credentials cluster-1 --region europe-west2 --project playpen-86bd2a && python3 update-k8s-gcp-cert-secret.py 24
-#       restartPolicy: OnFailure
-#   backoffLimit: 20
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Values.job.name }}
+  namespace: {{ .Values.namespace }}
+  annotations:
+    "helm.sh/hook": post-install
+spec:
+  ttlSecondsAfterFinished: 30
+  template:
+    spec:
+      serviceAccount: {{ .Values.job.serviceAccount }}
+      containers:
+      - name: "{{ .Values.job.name }}-container"
+        image: {{ .Values.job.image }}
+        command:
+        - sh
+        - -c
+        - gcloud container clusters get-credentials cluster-1 --region europe-west2 --project playpen-86bd2a && python3 update-k8s-gcp-cert-secret.py --expiry=24 --now=true
+      restartPolicy: OnFailure
+  backoffLimit: 20
