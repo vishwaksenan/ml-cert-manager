@@ -1,5 +1,10 @@
 cronJob:
-  name: secret-sync
+  name: secret-sync-cronjob
+  image: europe-west2-docker.pkg.dev/playpen-86bd2a/deployment-artifacts/playpen-base-image:cert
+  serviceAccount: svc-gke-secret-sync
+
+job:
+  name: secret-sync-job
   image: europe-west2-docker.pkg.dev/playpen-86bd2a/deployment-artifacts/playpen-base-image:cert
   serviceAccount: svc-gke-secret-sync
 
@@ -10,8 +15,10 @@ projects:
     gateway:
       enabled: true
       name: project1-gateway
+      namespace: istio-ingress
     ca:
       name: project1-ca
+      cn: example1.com
       secret: project1-ca-secret
       duration: 8760h # 1 year
       renewBefore: 720h # 30 days
@@ -24,8 +31,10 @@ projects:
     gateway:
       enabled: false
       name: project2-gateway
+      namespace: istio-ingress
     ca:
       name: project2-ca
+      cn: example2.com
       secret: project2-ca-secret
       duration: 8760h 
       renewBefore: 720h 
@@ -38,8 +47,10 @@ projects:
     gateway:
       enabled: false
       name: project3-gateway
+      namespace: istio-ingress
     ca:
       name: project3-ca
+      cn: example3.com
       secret: project3-ca-secret
       duration: 8760h 
       renewBefore: 720h 

@@ -6,7 +6,7 @@ metadata:
   namespace: {{ $.Values.namespace }}
 spec:
   isCA: true
-  commonName: {{ .ca.name }}
+  commonName: {{ .ca.cn }}
   duration: {{ .ca.duration }}
   renewBefore: {{ .ca.renewBefore }}
   secretName: {{ include "caSecretName" . }}
